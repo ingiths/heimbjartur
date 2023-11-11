@@ -1,0 +1,11 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "Rust",
+	"build": {
+		"dockerfile": "Containerfile.dev",
+		"context": "."
+	},
+    "runArgs": [
+		 "--name=developmentEnv", "--privileged"
+	]
+}

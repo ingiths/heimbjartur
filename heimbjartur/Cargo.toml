@@ -1,0 +1,24 @@
+[package]
+name = "heimbjartur"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+aya = { git = "https://github.com/aya-rs/aya", features = ["async_tokio"] }
+aya-log = { git = "https://github.com/aya-rs/aya" }
+clap = { version = "4.1", features = ["derive"] }
+anyhow = "1"
+env_logger = "0.10"
+libc = "0.2"
+log = "0.4"
+tokio = { version = "1.25", features = ["macros", "rt", "rt-multi-thread", "net", "signal"] }
+pnet = "0.34.0"
+rand = "0.8.5"
+# Need to have default-features = false due to conflict with kprobe package
+num_enum = { version = "0.7.0", default-features = false }
+
+
+[[bin]]
+name = "heimbjartur"
+path = "src/bin/main.rs"

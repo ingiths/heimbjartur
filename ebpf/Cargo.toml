@@ -1,0 +1,16 @@
+[package]
+name = "ebpf"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aya-bpf = { git = "https://github.com/aya-rs/aya" }
+aya-log-ebpf = { git = "https://github.com/aya-rs/aya" }
+aya-bpf-bindings = { git = "https://github.com/aya-rs/aya" }
+
+[build-dependencies]
+bindgen = "0.65.1"
+
+[[bin]]
+name = "kprobe"
+path = "src/kprobe.rs"

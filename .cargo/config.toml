@@ -1,0 +1,6 @@
+[alias]
+heimbjartur = "build --bin heimbjartur"
+kprobe = "build --bin kprobe -Z build-std=core --target=bpfel-unknown-none"
+
+heimbjartur-release = "build --bin heimbjartur --release"
+kprobe-release = "build --bin kprobe -Z build-std=core --target=bpfel-unknown-none --release"
