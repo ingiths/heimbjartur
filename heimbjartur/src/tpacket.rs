@@ -36,7 +36,7 @@ impl TestPacket {
             src,
             dst,
             proto,
-            expect 
+            expect,
         }
     }
 
@@ -90,9 +90,9 @@ impl TestPacket {
         dest: Ipv4Addr,
         payload: &[u8],
     ) -> MutableTcpPacket {
-        // The length of the data section is not specified in the segment header; 
-        // it can be calculated by subtracting the combined length of 
-        // the segment header and IP header from the total IP datagram length specified in the IP header. 
+        // The length of the data section is not specified in the segment header;
+        // it can be calculated by subtracting the combined length of
+        // the segment header and IP header from the total IP datagram length specified in the IP header.
         let tcp_data = vec![0_u8; TCP_HEADER_LENGTH + 1];
         let mut tcp_packet = MutableTcpPacket::owned(tcp_data).unwrap();
         tcp_packet.set_source(self.src.port());
@@ -143,11 +143,11 @@ impl fmt::Display for TestPacketAnswer {
             17 => "UDP",
             _ => unimplemented!(),
         };
-        
-        let expect_str =match self.expect {
+
+        let expect_str = match self.expect {
             crate::PASS => "PASS",
             crate::DROP => "DROP",
-            _ => unimplemented!()
+            _ => unimplemented!(),
         };
         write!(
             f,

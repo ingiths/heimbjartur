@@ -7,7 +7,7 @@ use heimbjartur::tester;
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let cli = CLI::parse();
-    
+
     match std::env::var("RUST_LOG") {
         Err(_) => std::env::set_var("RUST_LOG", "info"),
         _ => {}

@@ -20,6 +20,77 @@ pub fn init_channel() -> TransportSender {
     tx
 }
 
+pub fn parse_addr<T: Into<String>>(socket_addr: T) -> Vec<SocketAddr> {
+    let socket_addr = socket_addr.into();
+
+    let (address, port): (&str, u16) = if socket_addr.contains(":") {
+        let parts = socket_addr.split(":").collect::<Vec<_>>();
+        (parts[0], parts[1].parse().unwrap())
+    } else {
+        (socket_addr.as_str(), rand::random::<u16>())
+    };
+
+    let mut parts = address.split(".");
+
+    let a = match parts.next() {
+        Some(x) => {
+            if x == "*" {
+                (1..255).map(move |x| x.to_string()).collect()
+            } else {
+                vec![x.to_string()]
+            }
+        }
+        None => panic!("Oh no"),
+    };
+    let b = match parts.next() {
+        Some(x) => {
+            if x == "*" {
+                (1..255).map(move |x| x.to_string()).collect()
+            } else {
+                vec![x.to_string()]
+            }
+        }
+        None => panic!("Oh no"),
+    };
+    let c = match parts.next() {
+        Some(x) => {
+            if x == "*" {
+                (1..255).map(move |x| x.to_string()).collect()
+            } else {
+                vec![x.to_string()]
+            }
+        }
+        None => panic!("Oh no"),
+    };
+    let d = match parts.next() {
+        Some(x) => {
+            if x == "*" {
+                (1..255).map(move |x| x.to_string()).collect()
+            } else {
+                vec![x.to_string()]
+            }
+        }
+        None => panic!("Oh no"),
+    };
+
+    let mut combinations = Vec::new();
+    for x1 in a {
+        for x2 in b.clone() {
+            for x3 in c.clone() {
+                for x4 in d.clone() {
+                    combinations.push(
+                        format!("{}.{}.{}.{}:{}", x1, x2, x3, x4, port)
+                            .parse()
+                            .unwrap(),
+                    )
+                }
+            }
+        }
+    }
+
+    combinations
+}
+
 pub fn parse_socket_address_with_fallback<T: Into<String>>(
     addr: T,
 ) -> Result<SocketAddr, anyhow::Error> {
